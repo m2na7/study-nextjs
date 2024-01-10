@@ -1,8 +1,16 @@
+"use client";
+
+import { useFormState } from "react-dom";
+
 import ImagePicker from "@/components/meals/image-picker";
+import MealsFormSubmit from "@/components/meals/meals-form-submit";
 import { shareMeal } from "@/lib/action";
 import classes from "./page.module.css";
 
 export default function ShareMealPage() {
+  // ( , ) -> 실제 Server Action, 초기 state
+  const [state, formAction] = useFormState(shareMeal, { message: null });
+
   return (
     <>
       <header className={classes.header}>
@@ -13,7 +21,7 @@ export default function ShareMealPage() {
         <p>공유하고 싶은 음식을 자유롭게 작성하세요!</p>
       </header>
       <main className={classes.main}>
-        <form className={classes.form} action={shareMeal}>
+        <form className={classes.form} action={formAction}>
           <div className={classes.row}>
             <p>
               <label htmlFor="name">이름</label>
@@ -42,8 +50,9 @@ export default function ShareMealPage() {
             ></textarea>
           </p>
           <ImagePicker label="Your Image" name="image" />
+          {state.message && <p>{state.message}</p>}
           <p className={classes.actions}>
-            <button type="submit">공유하기</button>
+            <MealsFormSubmit />
           </p>
         </form>
       </main>
