@@ -53,10 +53,10 @@ export async function getStaticPaths() {
   // fallback: false -> getStaticPaths가 반환하지 않은 모든 path에 대하여 404페이지 반환
   // true는 데이터에 의존하는 정적페이지가 매우 많고, 빌드 시에 모든 페이지를 생성하는게
   // 너무 비효율적(큰)인 작업일때 사용한다 !
-  
+
   return {
     paths: paths,
-    fallback: false,
+    fallback: false, /// ㅁㄴㅇ
   };
 }
 
